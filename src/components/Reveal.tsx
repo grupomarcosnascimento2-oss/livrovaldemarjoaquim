@@ -4,22 +4,20 @@ export function Reveal({
   children,
   delay = 0,
   className = "",
-  as: Tag = "div",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
-  as?: "div" | "section" | "li" | "p" | "figure";
 }) {
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
           setShown(true);
           io.disconnect();
         }
@@ -31,13 +29,12 @@ export function Reveal({
   }, []);
 
   return (
-    // @ts-expect-error dynamic tag
-    <Tag
+    <div
       ref={ref}
       className={`reveal ${shown ? "reveal-in" : ""} ${className}`}
       style={{ animationDelay: `${delay}ms` }}
     >
       {children}
-    </Tag>
+    </div>
   );
 }
