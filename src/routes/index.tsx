@@ -265,38 +265,6 @@ function Index() {
         </div>
       </section>
 
-      {/* PAUSA EMOCIONAL */}
-      <section className="surface-light px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-2xl text-center">
-          <Reveal>
-            <Ornament />
-            <h2 className="mt-8 font-display text-4xl md:text-5xl">
-              Pare por um instante...
-            </h2>
-            <div className="mt-10 space-y-4 text-lg leading-[1.9] text-ink/80">
-              <p className="font-display text-2xl text-wood">
-                Feche os olhos por alguns segundos...
-              </p>
-              <p>Pense em Valdemar.</p>
-              <p>Talvez venha à sua memória o rosto dele.</p>
-              <p>A voz. O jeito de falar.</p>
-              <p>Algum encontro. Alguma celebração. Alguma lembrança.</p>
-              <p>
-                Talvez até um momento que você não imaginava que ainda guardava
-                dentro de si.
-              </p>
-              <p className="font-display text-2xl text-gold-deep">
-                Agora sorria.
-              </p>
-              <p>
-                Porque algumas pessoas passam pela nossa vida... mas outras
-                deixam marcas que o tempo não consegue apagar.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* JORNADA */}
       <section className="bg-secondary px-6 py-24 md:py-32">
         <div className="mx-auto max-w-3xl">
@@ -412,54 +380,54 @@ function Index() {
       </section>
 
       {/* PRÉ-LANÇAMENTO */}
-      <section id="reserva" className="bg-secondary px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-3xl">
+      <section id="reserva" className="surface-dark px-6 py-28 md:py-36">
+        <div className="mx-auto max-w-2xl text-center">
           <Reveal>
-            <div className="rounded-2xl border border-gold/35 bg-card px-7 py-14 text-center md:px-16">
-              <p className="text-xs tracking-[0.42em] text-gold-deep uppercase">
-                Pré-lançamento
-              </p>
-              <h2 className="mt-6 font-display text-4xl md:text-5xl">
+            <p className="text-xs tracking-[0.42em] text-gold-soft uppercase">
+              Pré-lançamento
+            </p>
+            <h2 className="mt-6 font-display text-4xl leading-snug md:text-5xl">
+              <span className="text-gold-gradient">
                 Faça parte deste momento
-              </h2>
-              <div className="mx-auto mt-10 max-w-xl space-y-5 text-left text-lg leading-[1.9] text-ink/85">
-                <p>
-                  Este é o pré-lançamento de uma história muito especial para
-                  nossa família.
-                </p>
-                <p>
-                  Antes que o livro chegue oficialmente às mãos dos leitores,
-                  quero convidar especialmente você que conheceu meu pai,
-                  conviveu com ele ou fez parte de algum momento de sua
-                  caminhada.
-                </p>
-                <p>
-                  Participar deste pré-lançamento é mais do que reservar um
-                  livro. É dizer:
-                </p>
-                <p className="border-l-2 border-gold pl-5 font-display text-2xl text-wood">
-                  “Eu quero fazer parte da preservação dessa história.”
-                </p>
-                <p>
-                  É ajudar a transformar lembranças em páginas. É guardar um
-                  pedaço dessa caminhada. É receber em suas mãos uma homenagem
-                  feita com amor.
-                </p>
-              </div>
-              <div className="mt-12">
-                <a
-                  href={WHATSAPP}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-gold btn-gold-hover"
-                >
-                  Quero reservar meu exemplar
-                </a>
-                <p className="mt-5 text-sm text-muted-foreground">
-                  Pré-lançamento — reserve seu exemplar e faça parte deste
-                  momento especial.
-                </p>
-              </div>
+              </span>
+            </h2>
+            <div className="mx-auto mt-10 max-w-xl space-y-5 text-lg leading-[1.9] text-cream/80">
+              <p>
+                Este é o pré-lançamento de uma história muito especial para
+                nossa família.
+              </p>
+              <p>
+                Antes que o livro chegue oficialmente às mãos dos leitores,
+                quero convidar especialmente você que conheceu meu pai,
+                conviveu com ele ou fez parte de algum momento de sua
+                caminhada.
+              </p>
+              <p>
+                Participar deste pré-lançamento é mais do que reservar um
+                livro. É dizer:
+              </p>
+              <p className="font-display text-2xl text-gold-soft">
+                “Eu quero fazer parte da preservação dessa história.”
+              </p>
+              <p>
+                É ajudar a transformar lembranças em páginas. É guardar um
+                pedaço dessa caminhada. É receber em suas mãos uma homenagem
+                feita com amor.
+              </p>
+            </div>
+            <div className="mt-14">
+              <a
+                href={WHATSAPP}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gold btn-gold-hover"
+              >
+                Quero reservar meu exemplar
+              </a>
+              <p className="mt-5 text-sm text-cream/60">
+                Pré-lançamento — reserve seu exemplar e faça parte deste
+                momento especial.
+              </p>
             </div>
           </Reveal>
         </div>
