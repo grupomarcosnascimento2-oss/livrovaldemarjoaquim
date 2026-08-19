@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 import bookCover from "@/assets/book-cover.png";
 
@@ -75,9 +75,16 @@ function ReservaForm() {
 
   if (sent) {
     return (
-      <p className="font-display text-xl text-gold-soft">
-        Obrigado! Sua reserva foi registrada com sucesso.
-      </p>
+      <div>
+        <p className="font-display text-xl text-gold-soft">
+          Obrigado! Sua reserva foi registrada com sucesso.
+        </p>
+        <p className="mt-6">
+          <Link to="/pagamento" className="btn-gold btn-gold-hover">
+            Já quero garantir meu exemplar via Pix
+          </Link>
+        </p>
+      </div>
     );
   }
 
