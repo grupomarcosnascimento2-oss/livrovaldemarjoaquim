@@ -241,47 +241,6 @@ function Index() {
         </div>
       </section>
 
-      {/* LEGADO */}
-      <section className="surface-light px-6 py-28 md:py-40">
-        <div className="mx-auto max-w-2xl text-center">
-          <Reveal>
-            <Ornament />
-            <h2 className="mt-10 font-display text-3xl leading-snug md:text-5xl">
-              O que permanece quando uma vida simples deixa um grande legado?
-            </h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <div className="mt-14 space-y-6 text-lg leading-[2] text-ink/80">
-              <p>Talvez não sejam os bens.</p>
-              <p>Talvez não sejam os títulos.</p>
-              <p>
-                Talvez não sejam as conquistas que o mundo costuma medir.
-              </p>
-              <p className="font-display text-2xl text-gold-deep">
-                Talvez sejam as pessoas que foram tocadas.
-              </p>
-              <p>Os exemplos que permaneceram.</p>
-              <p>As lembranças que continuam vivas.</p>
-              <p>Os gestos que alguém nunca esqueceu.</p>
-              <p>
-                E é justamente por isso que este livro está sendo escrito. Para
-                que a história de Valdemar não fique apenas na memória daqueles
-                que conviveram com ele.
-              </p>
-              <p>
-                Para que ela possa atravessar o tempo. Para que seus filhos,
-                seus netos e as próximas gerações possam conhecer o homem que
-                ele foi.
-              </p>
-              <p>
-                E para que todos aqueles que um dia cruzaram seu caminho possam
-                guardar essa lembrança em um lugar especial.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* PRÉ-LANÇAMENTO */}
       <section id="reserva" className="surface-dark px-6 py-28 md:py-36">
         <div className="mx-auto max-w-2xl text-center">
