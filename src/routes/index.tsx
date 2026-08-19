@@ -102,8 +102,8 @@ function Index() {
     <main className="overflow-x-hidden">
       {/* HERO */}
       <section className="surface-light relative px-6 pt-20 pb-24 md:pt-28 md:pb-32">
-        <div className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-[1.05fr_0.95fr]">
-          <Reveal className="order-2 md:order-1">
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
             <p className="text-xs tracking-[0.42em] text-gold-deep uppercase">
               Pré-lançamento
             </p>
@@ -112,7 +112,7 @@ function Index() {
               <br />
               <span className="text-gold-gradient">Serviço no Altar</span>
             </h1>
-            <div className="mt-8 max-w-md">
+            <div className="mx-auto mt-8 max-w-md">
               <p className="font-display text-2xl leading-relaxed text-wood md:text-3xl">
                 Uma história simples.
                 <br />
@@ -132,7 +132,7 @@ function Index() {
             </div>
           </Reveal>
 
-          <Reveal delay={200} className="order-1 flex justify-center md:order-2">
+          <Reveal delay={200} className="mt-12 flex justify-center">
             <div className="relative">
               <div
                 className="absolute -inset-10 rounded-full opacity-70 blur-3xl"
@@ -155,72 +155,10 @@ function Index() {
             </div>
           </Reveal>
 
-          <Reveal
-            delay={280}
-            className="order-3 flex flex-col items-start gap-6 sm:flex-row sm:items-center md:col-span-2 md:justify-center"
-          >
+          <Reveal delay={280} className="mt-12 flex justify-center">
             <a href="#reserva" className="btn-gold btn-gold-hover">
               Quero participar do pré-lançamento
             </a>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* HISTÓRIA REAL */}
-      <section id="historia" className="bg-secondary px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-3xl">
-          <Reveal>
-            <Ornament />
-            <h2 className="mt-8 text-center font-display text-4xl md:text-5xl">
-              Este livro nasceu de uma história real
-            </h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <div className="mt-12 space-y-6 text-lg leading-[1.9] text-ink/85">
-              <p>
-                Algumas histórias merecem ser contadas.
-                <br />
-                Outras precisam ser preservadas.
-              </p>
-              <p>
-                A vida de{" "}
-                <strong className="font-semibold text-gold-deep">
-                  Valdemar Joaquim
-                </strong>{" "}
-                foi construída longe dos holofotes.
-              </p>
-              <p>
-                Começou na simplicidade da roça, no interior do Piauí.
-              </p>
-              <p>
-                Passou pelos desafios de uma juventude marcada pelo trabalho,
-                pela chegada a Brasília, pela disciplina do Exército Brasileiro,
-                pela construção de uma família e, mais tarde, pelo chamado para
-                servir a Deus como Ministro Extraordinário da Comunhão
-                Eucarística.
-              </p>
-              <p>Mas esta não é apenas uma história sobre o que ele fez.</p>
-              <p className="font-display text-2xl text-wood">
-                É sobre quem ele foi.
-              </p>
-              <p className="font-display text-xl leading-loose text-wood/90">
-                Um homem simples.
-                <br />
-                Um pai.
-                <br />
-                Um esposo.
-                <br />
-                Um trabalhador.
-                <br />
-                Um cristão.
-                <br />
-                Um servidor.
-              </p>
-              <p>
-                Um homem que aprendeu que pequenas atitudes, quando feitas com
-                amor e zelo, podem tocar profundamente a vida de outras pessoas.
-              </p>
-            </div>
           </Reveal>
         </div>
       </section>
