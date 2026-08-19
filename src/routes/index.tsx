@@ -101,10 +101,10 @@ function Index() {
   return (
     <main className="overflow-x-hidden">
       {/* HERO */}
-      <section className="surface-dark relative px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+      <section className="surface-light relative px-6 pt-20 pb-24 md:pt-28 md:pb-32">
         <div className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-[1.05fr_0.95fr]">
           <Reveal>
-            <p className="text-xs tracking-[0.42em] text-gold-soft uppercase">
+            <p className="text-xs tracking-[0.42em] text-gold-deep uppercase">
               Pré-lançamento
             </p>
             <h1 className="mt-6 font-display text-5xl leading-[1.05] md:text-7xl">
@@ -113,16 +113,16 @@ function Index() {
               <span className="text-gold-gradient">Serviço no Altar</span>
             </h1>
             <div className="mt-8 max-w-md">
-              <p className="font-display text-2xl leading-relaxed text-gold-soft md:text-3xl">
+              <p className="font-display text-2xl leading-relaxed text-wood md:text-3xl">
                 Uma história simples.
                 <br />
                 Uma vida de fé.
                 <br />
                 Um legado que permanece.
               </p>
-              <p className="mt-7 text-base leading-relaxed text-cream/70">
+              <p className="mt-7 text-base leading-relaxed text-muted-foreground">
                 A história de{" "}
-                <strong className="font-semibold text-cream">
+                <strong className="font-semibold text-wood">
                   Valdemar Joaquim
                 </strong>
                 , contada por seu filho Marcos Nascimento, para guardar em
