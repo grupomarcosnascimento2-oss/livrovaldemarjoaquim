@@ -159,7 +159,6 @@ function Index() {
                 style={{
                   boxShadow: "var(--shadow-book)",
                   transform: "perspective(1400px) rotateY(-13deg)",
-                  borderLeft: "6px solid oklch(0.22 0.03 55)",
                 }}
               />
             </div>
