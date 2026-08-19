@@ -32,6 +32,9 @@ const WHATSAPP =
     'Olá! Quero reservar meu exemplar do livro "Da Roça ao Serviço no Altar".',
   );
 
+const SHEETS_URL =
+  "https://script.google.com/macros/s/AKfycbxCeBePSnN1EUUNaGWziXZN6wZyV8UDfTCo2CmYysPG9ZrmHb7AWphsnEveiddRZw-86Q/exec";
+
 function Ornament() {
   return (
     <div className="flex items-center justify-center gap-3 text-gold">
@@ -57,22 +60,23 @@ function ReservaForm() {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const message =
-      `Olá! Quero reservar meu exemplar do livro "Da Roça ao Serviço no Altar".\n\n` +
-      `Nome: ${name}\nE-mail: ${email}\nWhatsApp: ${whatsapp}`;
-    window.open(
-      `https://wa.me/?text=${encodeURIComponent(message)}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
+
+    fetch(SHEETS_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ nome: name, email, whatsapp }),
+    }).catch(() => {
+      // Envio silencioso: falha aqui não deve impedir a confirmação ao usuário.
+    });
+
     setSent(true);
   }
 
   if (sent) {
     return (
       <p className="font-display text-xl text-gold-soft">
-        Obrigado! Seus dados foram enviados — em instantes você será
-        direcionado ao WhatsApp para confirmar sua reserva.
+        Obrigado! Sua reserva foi registrada com sucesso.
       </p>
     );
   }
