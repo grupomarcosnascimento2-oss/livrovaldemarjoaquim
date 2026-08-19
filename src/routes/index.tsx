@@ -221,6 +221,22 @@ function Index() {
               Este livro reúne lembranças, acontecimentos e testemunhos de uma
               vida que foi muito maior do que as palavras conseguem explicar.
             </p>
+            <div className="mx-auto mt-8 max-w-2xl space-y-5 text-center text-lg leading-[1.9] text-muted-foreground">
+              <p>
+                E é justamente por isso que este livro foi escrito. Para que a
+                história de Valdemar não fique apenas na memória daqueles que
+                conviveram com ele.
+              </p>
+              <p>
+                Para que ela possa atravessar o tempo. Para que seus filhos,
+                seus netos e as próximas gerações possam conhecer o homem que
+                ele foi.
+              </p>
+              <p>
+                E para que todos aqueles que um dia cruzaram seu caminho
+                possam guardar essa lembrança em um lugar especial.
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
