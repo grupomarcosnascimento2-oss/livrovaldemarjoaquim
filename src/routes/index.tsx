@@ -103,7 +103,7 @@ function Index() {
       {/* HERO */}
       <section className="surface-light relative px-6 pt-20 pb-24 md:pt-28 md:pb-32">
         <div className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-[1.05fr_0.95fr]">
-          <Reveal>
+          <Reveal className="order-2 md:order-1">
             <p className="text-xs tracking-[0.42em] text-gold-deep uppercase">
               Pré-lançamento
             </p>
@@ -130,17 +130,9 @@ function Index() {
                 família, pela fé e pelo serviço à Igreja.
               </p>
             </div>
-            <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-              <a href="#reserva" className="btn-gold btn-gold-hover">
-                Quero participar do pré-lançamento
-              </a>
-              <a href="#historia" className="btn-quiet">
-                Conhecer a história do livro
-              </a>
-            </div>
           </Reveal>
 
-          <Reveal delay={200} className="flex justify-center">
+          <Reveal delay={200} className="order-1 flex justify-center md:order-2">
             <div className="relative">
               <div
                 className="absolute -inset-10 rounded-full opacity-70 blur-3xl"
@@ -161,6 +153,15 @@ function Index() {
                 }}
               />
             </div>
+          </Reveal>
+
+          <Reveal
+            delay={280}
+            className="order-3 flex flex-col items-start gap-6 sm:flex-row sm:items-center md:col-span-2 md:justify-center"
+          >
+            <a href="#reserva" className="btn-gold btn-gold-hover">
+              Quero participar do pré-lançamento
+            </a>
           </Reveal>
         </div>
       </section>
@@ -224,52 +225,33 @@ function Index() {
         </div>
       </section>
 
-      {/* SE VOCÊ CONHECEU VALDEMAR */}
-      <section className="bg-background px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-2xl text-center">
-          <Reveal>
-            <h2 className="font-display text-3xl leading-snug md:text-4xl">
-              Se você conheceu{" "}
-              <span className="text-gold-gradient">Valdemar</span>, esta
-              história também é um pouco sua.
-            </h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <div className="mt-12 space-y-5 text-lg leading-[1.9] text-muted-foreground">
-              <p>Talvez você tenha conversado com ele.</p>
-              <p>Talvez tenha recebido a Eucaristia de suas mãos.</p>
-              <p>Talvez tenha trabalhado ao seu lado.</p>
-              <p>Talvez tenha encontrado com ele na Igreja.</p>
-              <p>
-                Talvez tenha recebido uma palavra, uma ajuda, um sorriso ou
-                simplesmente sua presença.
-              </p>
-              <p>
-                Ou talvez você apenas tenha conhecido aquele homem simples que
-                estava sempre disposto a servir.
-              </p>
-              <p className="pt-4 font-display text-2xl text-wood">
-                Agora essa memória está sendo transformada em páginas.
-              </p>
-              <p>
-                E talvez, ao abrir este livro, você encontre não apenas a
-                história de Valdemar...
-              </p>
-              <p className="font-display text-2xl text-gold-deep">
-                mas também um pedaço da sua própria história.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* JORNADA */}
       <section className="bg-secondary px-6 py-24 md:py-32">
         <div className="mx-auto max-w-3xl">
           <Reveal>
             <h2 className="text-center font-display text-4xl md:text-5xl">
-              Uma vida simples. Uma grande caminhada.
+              Este livro nasceu de uma história real
             </h2>
+            <p className="mt-5 text-center font-display text-2xl text-wood">
+              Uma vida simples. Uma grande caminhada.
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="mx-auto mt-10 max-w-2xl space-y-5 text-center text-lg leading-[1.9] text-muted-foreground">
+              <p>
+                Algumas histórias merecem ser contadas.
+                <br />
+                Outras precisam ser preservadas.
+              </p>
+              <p>
+                A vida de{" "}
+                <strong className="font-semibold text-gold-deep">
+                  Valdemar Joaquim
+                </strong>{" "}
+                foi construída longe dos holofotes.
+              </p>
+              <p>Começou na simplicidade da roça, no interior do Piauí.</p>
+            </div>
           </Reveal>
           <ol className="mt-16 space-y-10 border-l border-gold/40 pl-8 md:pl-12">
             {journey.map((step, i) => (
