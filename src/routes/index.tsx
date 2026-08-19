@@ -81,22 +81,6 @@ const journey = [
   },
 ];
 
-const inside = [
-  "a infância na roça",
-  "a partida para Brasília",
-  "os desafios dos primeiros anos",
-  "a trajetória no Exército",
-  "o reconhecimento por seu trabalho",
-  "o encontro com Maria José",
-  "a construção da família",
-  "o chamado para servir à Igreja",
-  "sua missão como Ministro Extraordinário da Comunhão Eucarística",
-  "os anos de serviço em Brasília",
-  "sua chegada a Caldas Novas",
-  "sua continuidade na missão",
-  "e, principalmente, os valores que deixou para aqueles que tiveram o privilégio de conhecê-lo",
-];
-
 function Index() {
   return (
     <main className="overflow-x-hidden">
@@ -237,22 +221,7 @@ function Index() {
               Este livro reúne lembranças, acontecimentos e testemunhos de uma
               vida que foi muito maior do que as palavras conseguem explicar.
             </p>
-            <p className="mt-8 text-center font-display text-2xl text-wood">
-              Entre suas páginas estão:
-            </p>
           </Reveal>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-            {inside.map((item, i) => (
-              <li key={item}>
-                <Reveal delay={i * 40}>
-                  <div className="flex h-full items-start gap-3 rounded-lg border border-border/70 bg-card px-5 py-4 leading-relaxed text-ink/85">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
-                    <span>{item}</span>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
