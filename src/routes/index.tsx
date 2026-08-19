@@ -155,7 +155,7 @@ function Index() {
                 width={1024}
                 height={1536}
                 alt="Capa do livro Da Roça ao Serviço no Altar, de Marcos Nascimento"
-                className="relative w-[260px] rounded-r-md md:w-[340px]"
+                className="relative w-[320px] rounded-r-md md:w-[420px]"
                 style={{
                   transform: "perspective(1400px) rotateY(-13deg)",
                 }}
