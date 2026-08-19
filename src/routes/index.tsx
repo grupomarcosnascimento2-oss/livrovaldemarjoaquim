@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
-import bookCover from "@/assets/book-cover.jpg";
+import bookCover from "@/assets/book-cover.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
