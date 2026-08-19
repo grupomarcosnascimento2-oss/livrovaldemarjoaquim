@@ -1,3 +1,4 @@
+import { useState, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 import bookCover from "@/assets/book-cover.png";
@@ -45,6 +46,88 @@ function Ornament() {
       </svg>
       <span className="h-px w-14 rule-gold" aria-hidden />
     </div>
+  );
+}
+
+function ReservaForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [sent, setSent] = useState(false);
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const message =
+      `Olá! Quero reservar meu exemplar do livro "Da Roça ao Serviço no Altar".\n\n` +
+      `Nome: ${name}\nE-mail: ${email}\nWhatsApp: ${whatsapp}`;
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(message)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+    setSent(true);
+  }
+
+  if (sent) {
+    return (
+      <p className="font-display text-xl text-gold-soft">
+        Obrigado! Seus dados foram enviados — em instantes você será
+        direcionado ao WhatsApp para confirmar sua reserva.
+      </p>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="mx-auto flex max-w-md flex-col gap-4 text-left"
+    >
+      <div>
+        <label htmlFor="reserva-nome" className="text-sm text-cream/70">
+          Nome
+        </label>
+        <input
+          id="reserva-nome"
+          type="text"
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="mt-1 w-full rounded-md border border-gold/30 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-gold/70 focus:outline-none"
+          placeholder="Seu nome completo"
+        />
+      </div>
+      <div>
+        <label htmlFor="reserva-email" className="text-sm text-cream/70">
+          E-mail
+        </label>
+        <input
+          id="reserva-email"
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="mt-1 w-full rounded-md border border-gold/30 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-gold/70 focus:outline-none"
+          placeholder="seu@email.com"
+        />
+      </div>
+      <div>
+        <label htmlFor="reserva-whatsapp" className="text-sm text-cream/70">
+          WhatsApp
+        </label>
+        <input
+          id="reserva-whatsapp"
+          type="tel"
+          required
+          value={whatsapp}
+          onChange={(e) => setWhatsapp(e.target.value)}
+          className="mt-1 w-full rounded-md border border-gold/30 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-gold/70 focus:outline-none"
+          placeholder="(00) 00000-0000"
+        />
+      </div>
+      <button type="submit" className="btn-gold btn-gold-hover mt-2">
+        Quero reservar meu exemplar
+      </button>
+    </form>
   );
 }
 
@@ -276,20 +359,13 @@ function Index() {
                 pedaço dessa caminhada. É receber em suas mãos uma homenagem
                 feita com amor.
               </p>
+              <p className="font-display text-xl text-gold-soft">
+                Lançamento oficial dia 26 de setembro de 2026 às 20h30, no
+                salão da Paróquia Perpétuo Socorro, em Taguatinga Centro.
+              </p>
             </div>
             <div className="mt-14">
-              <a
-                href={WHATSAPP}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold btn-gold-hover"
-              >
-                Quero reservar meu exemplar
-              </a>
-              <p className="mt-5 text-sm text-cream/60">
-                Pré-lançamento — reserve seu exemplar e faça parte deste
-                momento especial.
-              </p>
+              <ReservaForm />
             </div>
           </Reveal>
         </div>
