@@ -153,12 +153,17 @@ function ReservaForm() {
                 type="button"
                 onClick={() => setEntrega(o.id)}
                 aria-pressed={selecionada}
-                className={`rounded-lg border px-4 py-4 text-left transition-colors ${
+                className={`relative rounded-lg border px-4 py-4 text-left transition-colors ${
                   selecionada
                     ? "border-gold bg-cream/10"
                     : "border-gold/25 bg-cream/5 hover:border-gold/50"
                 }`}
               >
+                {selecionada && (
+                  <span className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-gold px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-background">
+                    ✓ Selecionado
+                  </span>
+                )}
                 <p className="font-display text-base text-cream">
                   {o.titulo}
                 </p>
@@ -345,6 +350,13 @@ function ReservaForm() {
           </div>
         </>
       )}
+
+      <div className="rounded-lg border border-gold/30 bg-cream/5 px-4 py-3 text-sm text-cream/85">
+        Você escolheu:{" "}
+        <strong className="text-gold-soft">
+          {opcaoEscolhida.titulo} — {opcaoEscolhida.preco}
+        </strong>
+      </div>
 
       <button type="submit" className="btn-gold btn-gold-hover mt-2">
         Quero reservar meu exemplar
