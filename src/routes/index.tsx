@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 import bookCover from "@/assets/book-cover.png";
 
@@ -77,6 +77,7 @@ const ENTREGAS: {
 ];
 
 function ReservaForm() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -114,6 +115,11 @@ function ReservaForm() {
     });
 
     setSent(true);
+
+    // Segue automaticamente para o pagamento, sem exigir um segundo clique.
+    setTimeout(() => {
+      navigate({ to: "/pagamento", search: { entrega } });
+    }, 900);
   }
 
   if (sent) {
@@ -121,6 +127,9 @@ function ReservaForm() {
       <div>
         <p className="font-display text-xl text-gold-soft">
           Obrigado! Sua reserva foi registrada com sucesso.
+        </p>
+        <p className="mt-3 text-sm text-cream/60">
+          Redirecionando para o pagamento...
         </p>
         <p className="mt-6">
           <Link
@@ -138,6 +147,7 @@ function ReservaForm() {
   return (
     <form
       onSubmit={handleSubmit}
+      autoComplete="off"
       className="mx-auto flex max-w-md flex-col gap-4 text-left"
     >
       <div>
@@ -185,6 +195,7 @@ function ReservaForm() {
         </label>
         <input
           id="reserva-nome"
+          autoComplete="off"
           type="text"
           required
           value={name}
@@ -199,6 +210,7 @@ function ReservaForm() {
         </label>
         <input
           id="reserva-email"
+          autoComplete="off"
           type="email"
           required
           value={email}
@@ -213,6 +225,7 @@ function ReservaForm() {
         </label>
         <input
           id="reserva-whatsapp"
+          autoComplete="off"
           type="tel"
           required
           value={whatsapp}
@@ -234,6 +247,7 @@ function ReservaForm() {
               </label>
               <input
                 id="reserva-endereco"
+          autoComplete="off"
                 type="text"
                 required
                 value={endereco}
@@ -251,6 +265,7 @@ function ReservaForm() {
               </label>
               <input
                 id="reserva-numero"
+          autoComplete="off"
                 type="text"
                 required
                 value={numero}
@@ -271,6 +286,7 @@ function ReservaForm() {
               </label>
               <input
                 id="reserva-bairro"
+          autoComplete="off"
                 type="text"
                 required
                 value={bairro}
@@ -288,6 +304,7 @@ function ReservaForm() {
               </label>
               <input
                 id="reserva-complemento"
+          autoComplete="off"
                 type="text"
                 value={complemento}
                 onChange={(e) => setComplemento(e.target.value)}
@@ -307,6 +324,7 @@ function ReservaForm() {
               </label>
               <input
                 id="reserva-cidade"
+          autoComplete="off"
                 type="text"
                 required
                 value={cidade}
@@ -324,6 +342,7 @@ function ReservaForm() {
               </label>
               <input
                 id="reserva-estado"
+          autoComplete="off"
                 type="text"
                 required
                 value={estado}
@@ -340,6 +359,7 @@ function ReservaForm() {
             </label>
             <input
               id="reserva-cep"
+          autoComplete="off"
               type="text"
               required
               value={cep}
