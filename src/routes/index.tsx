@@ -382,62 +382,6 @@ function Index() {
         </div>
       </section>
 
-      {/* CARTA DO AUTOR */}
-      <section className="bg-background px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-2xl">
-          <Reveal>
-            <h2 className="text-center font-display text-4xl md:text-5xl">
-              Uma mensagem de Marcos Nascimento
-            </h2>
-            <div
-              className="mt-12 rounded-lg border border-border px-7 py-12 md:px-14"
-              style={{
-                background:
-                  "linear-gradient(180deg, oklch(0.985 0.014 88), oklch(0.955 0.024 84))",
-              }}
-            >
-              <div className="space-y-5 text-lg leading-[1.95] text-ink/85">
-                <p>
-                  Este livro nasceu de uma necessidade muito simples: não deixar
-                  a história do meu pai se perder no tempo.
-                </p>
-                <p>Convivi com Valdemar durante toda a minha vida.</p>
-                <p>
-                  Conheci seus gestos, seu jeito de servir, sua dedicação à
-                  família e sua fé.
-                </p>
-                <p>
-                  Mas, ao reunir essas lembranças para escrever este livro,
-                  percebi algo ainda maior: a história do meu pai não pertence
-                  somente à nossa família.
-                </p>
-                <p>
-                  Ela também pertence às pessoas que caminharam com ele. Àqueles
-                  que receberam sua ajuda. Àqueles que rezaram ao seu lado.
-                  Àqueles que o encontraram na Igreja. Àqueles que simplesmente
-                  tiveram a oportunidade de conhecê-lo.
-                </p>
-                <p>Por isso, este livro é uma homenagem.</p>
-                <p>Mas também é um convite.</p>
-                <p>
-                  Um convite para lembrar. Para agradecer. Para sorrir. E, quem
-                  sabe, para se emocionar novamente com a lembrança de um homem
-                  que viveu uma vida simples, mas deixou marcas profundas.
-                </p>
-                <p>
-                  Se você conheceu meu pai, espero que ao ler estas páginas você
-                  reencontre um pouco dele.
-                </p>
-              </div>
-              <p className="mt-10 text-muted-foreground">Com carinho,</p>
-              <p className="mt-1 font-display text-3xl text-gold-deep">
-                Marcos Nascimento
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* SEGUNDA PAUSA + FINAL */}
       <section className="surface-dark px-6 py-28 md:py-36">
         <div className="mx-auto max-w-2xl text-center">
