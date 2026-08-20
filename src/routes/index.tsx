@@ -52,11 +52,45 @@ function Ornament() {
   );
 }
 
+type TipoEntrega = "retirada" | "correio";
+
+const ENTREGAS: {
+  id: TipoEntrega;
+  titulo: string;
+  preco: string;
+  descricao: string;
+}[] = [
+  {
+    id: "retirada",
+    titulo: "Retirar no dia do lançamento",
+    preco: "R$ 39,90",
+    descricao:
+      "Você retira seu exemplar pessoalmente no dia 26 de setembro de 2026, no salão da Paróquia Perpétuo Socorro, em Taguatinga Centro.",
+  },
+  {
+    id: "correio",
+    titulo: "Receber em casa pelos Correios",
+    preco: "R$ 49,90",
+    descricao:
+      "Para a sua comodidade, o exemplar é enviado pelos Correios direto para a sua residência, a partir da data do lançamento.",
+  },
+];
+
 function ReservaForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
+  const [entrega, setEntrega] = useState<TipoEntrega>("retirada");
+  const [bairro, setBairro] = useState("");
+  const [endereco, setEndereco] = useState("");
+  const [numero, setNumero] = useState("");
+  const [complemento, setComplemento] = useState("");
+  const [estado, setEstado] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [cep, setCep] = useState("");
   const [sent, setSent] = useState(false);
+
+  const opcaoEscolhida = ENTREGAS.find((o) => o.id === entrega)!;
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -65,7 +99,16 @@ function ReservaForm() {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ nome: name, email, whatsapp }),
+      body: JSON.stringify({
+        nome: name,
+        email,
+        whatsapp,
+        entrega: opcaoEscolhida.titulo,
+        preco: opcaoEscolhida.preco,
+        ...(entrega === "correio"
+          ? { bairro, endereco, numero, complemento, estado, cidade, cep }
+          : {}),
+      }),
     }).catch(() => {
       // Envio silencioso: falha aqui não deve impedir a confirmação ao usuário.
     });
@@ -80,7 +123,11 @@ function ReservaForm() {
           Obrigado! Sua reserva foi registrada com sucesso.
         </p>
         <p className="mt-6">
-          <Link to="/pagamento" className="btn-gold btn-gold-hover">
+          <Link
+            to="/pagamento"
+            search={{ entrega }}
+            className="btn-gold btn-gold-hover"
+          >
             Já quero garantir meu exemplar via Pix
           </Link>
         </p>
@@ -93,6 +140,40 @@ function ReservaForm() {
       onSubmit={handleSubmit}
       className="mx-auto flex max-w-md flex-col gap-4 text-left"
     >
+      <div>
+        <p className="text-sm text-cream/70">
+          Como você prefere receber seu exemplar?
+        </p>
+        <div className="mt-2 grid gap-3 sm:grid-cols-2">
+          {ENTREGAS.map((o) => {
+            const selecionada = o.id === entrega;
+            return (
+              <button
+                key={o.id}
+                type="button"
+                onClick={() => setEntrega(o.id)}
+                aria-pressed={selecionada}
+                className={`rounded-lg border px-4 py-4 text-left transition-colors ${
+                  selecionada
+                    ? "border-gold bg-cream/10"
+                    : "border-gold/25 bg-cream/5 hover:border-gold/50"
+                }`}
+              >
+                <p className="font-display text-base text-cream">
+                  {o.titulo}
+                </p>
+                <p className="mt-1 font-display text-xl text-gold-soft">
+                  {o.preco}
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-cream/60">
+                  {o.descricao}
+                </p>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       <div>
         <label htmlFor="reserva-nome" className="text-sm text-cream/70">
           Nome
@@ -135,6 +216,136 @@ function ReservaForm() {
           placeholder="(00) 00000-0000"
         />
       </div>
+
+      {entrega === "correio" && (
+        <>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="col-span-2 sm:col-span-1">
+              <label
+                htmlFor="reserva-endereco"
+                className="text-sm text-cream/70"
+              >
+                Endereço
+              </label>
+              <input
+                id="reserva-endereco"
+                type="text"
+                required
+                value={endereco}
+                onChange={(e) => setEndereco(e.target.value)}
+                className="mt-1 w-full rounded-md border border-gold/30 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-gold/70 focus:outline-none"
+                placeholder="Rua, avenida..."
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="reserva-numero"
+                className="text-sm text-cream/70"
+              >
+                Número
+              </label>
+              <input
+                id="reserva-numero"
+                type="text"
+                required
+                value={numero}
+                onChange={(e) => setNumero(e.target.value)}
+                className="mt-1 w-full rounded-md border border-gold/30 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-gold/70 focus:outline-none"
+                placeholder="Nº"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                htmlFor="reserva-bairro"
+                className="text-sm text-cream/70"
+              >
+                Bairro
+              </label>
+              <input
+                id="reserva-bairro"
+                type="text"
+                required
+                value={bairro}
+                onChange={(e) => setBairro(e.target.value)}
+                className="mt-1 w-full rounded-md border border-gold/30 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-gold/70 focus:outline-none"
+                placeholder="Seu bairro"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="reserva-complemento"
+                className="text-sm text-cream/70"
+              >
+                Complemento (opcional)
+              </label>
+              <input
+                id="reserva-complemento"
+                type="text"
+                value={complemento}
+                onChange={(e) => setComplemento(e.target.value)}
+                className="mt-1 w-full rounded-md border border-gold/30 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-gold/70 focus:outline-none"
+                placeholder="Apto, bloco..."
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                htmlFor="reserva-cidade"
+                className="text-sm text-cream/70"
+              >
+                Cidade
+              </label>
+              <input
+                id="reserva-cidade"
+                type="text"
+                required
+                value={cidade}
+                onChange={(e) => setCidade(e.target.value)}
+                className="mt-1 w-full rounded-md border border-gold/30 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-gold/70 focus:outline-none"
+                placeholder="Sua cidade"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="reserva-estado"
+                className="text-sm text-cream/70"
+              >
+                Estado
+              </label>
+              <input
+                id="reserva-estado"
+                type="text"
+                required
+                value={estado}
+                onChange={(e) => setEstado(e.target.value)}
+                className="mt-1 w-full rounded-md border border-gold/30 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-gold/70 focus:outline-none"
+                placeholder="UF"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="reserva-cep" className="text-sm text-cream/70">
+              CEP
+            </label>
+            <input
+              id="reserva-cep"
+              type="text"
+              required
+              value={cep}
+              onChange={(e) => setCep(e.target.value)}
+              className="mt-1 w-full rounded-md border border-gold/30 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/40 focus:border-gold/70 focus:outline-none"
+              placeholder="00000-000"
+            />
+          </div>
+        </>
+      )}
+
       <button type="submit" className="btn-gold btn-gold-hover mt-2">
         Quero reservar meu exemplar
       </button>

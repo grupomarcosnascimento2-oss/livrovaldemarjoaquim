@@ -2,7 +2,28 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 
+type TipoEntrega = "retirada" | "correio";
+
+const ENTREGAS: Record<
+  TipoEntrega,
+  { titulo: string; preco: string }
+> = {
+  retirada: {
+    titulo: "Retirar no dia do lançamento",
+    preco: "R$ 39,90",
+  },
+  correio: {
+    titulo: "Receber em casa pelos Correios",
+    preco: "R$ 49,90",
+  },
+};
+
 export const Route = createFileRoute("/pagamento")({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { entrega: TipoEntrega } => ({
+    entrega: search.entrega === "correio" ? "correio" : "retirada",
+  }),
   head: () => ({
     meta: [
       { title: "Pagamento — Da Roça ao Serviço no Altar" },
@@ -18,33 +39,10 @@ export const Route = createFileRoute("/pagamento")({
 
 const PIX_KEY = "livropapaivaldemarjoaquim@gmail.com";
 
-type Opcao = {
-  id: "retirada" | "correio";
-  titulo: string;
-  preco: string;
-  descricao: string;
-};
-
-const OPCOES: Opcao[] = [
-  {
-    id: "retirada",
-    titulo: "Retirar no dia do lançamento",
-    preco: "R$ 39,90",
-    descricao:
-      "Você retira seu exemplar pessoalmente no dia 26 de setembro de 2026, no salão da Paróquia Perpétuo Socorro, em Taguatinga Centro.",
-  },
-  {
-    id: "correio",
-    titulo: "Receber em casa pelos Correios",
-    preco: "R$ 49,90",
-    descricao:
-      "Para a sua comodidade, o exemplar é enviado pelos Correios direto para a sua residência, a partir da data do lançamento.",
-  },
-];
-
 function Pagamento() {
+  const { entrega } = Route.useSearch();
+  const opcao = ENTREGAS[entrega];
   const [copied, setCopied] = useState(false);
-  const [opcao, setOpcao] = useState<Opcao>(OPCOES[0]);
 
   async function handleCopy() {
     try {
@@ -89,42 +87,6 @@ function Pagamento() {
         </Reveal>
 
         <Reveal delay={180}>
-          <div className="mt-8">
-            <p className="text-center text-xs tracking-[0.32em] text-gold-deep uppercase">
-              Como você prefere receber seu exemplar?
-            </p>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {OPCOES.map((o) => {
-                const selecionada = o.id === opcao.id;
-                return (
-                  <button
-                    key={o.id}
-                    type="button"
-                    onClick={() => setOpcao(o)}
-                    aria-pressed={selecionada}
-                    className={`rounded-xl border px-5 py-6 text-left transition-colors ${
-                      selecionada
-                        ? "border-gold bg-card shadow-sm"
-                        : "border-border/70 bg-background hover:border-gold/50"
-                    }`}
-                  >
-                    <p className="font-display text-lg text-wood">
-                      {o.titulo}
-                    </p>
-                    <p className="mt-2 font-display text-3xl text-gold-deep">
-                      {o.preco}
-                    </p>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      {o.descricao}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={240}>
           <div className="mt-8 rounded-2xl border border-gold/35 bg-card px-6 py-10 text-center md:px-10">
             <p className="text-xs tracking-[0.32em] text-gold-deep uppercase">
               {opcao.titulo}
@@ -174,7 +136,10 @@ function Pagamento() {
             vemos no lançamento!
           </p>
           <p className="mt-4 text-center">
-            <Link to="/" className="text-sm text-gold-deep underline underline-offset-4">
+            <Link
+              to="/"
+              className="text-sm text-gold-deep underline underline-offset-4"
+            >
               Voltar para a página do livro
             </Link>
           </p>
