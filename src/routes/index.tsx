@@ -141,7 +141,7 @@ function ReservaForm() {
       className="mx-auto flex max-w-md flex-col gap-4 text-left"
     >
       <div>
-        <p className="text-sm text-cream/70">
+        <p className="text-base text-cream/70">
           Como você prefere receber seu exemplar?
         </p>
         <div className="mt-2 grid gap-3 sm:grid-cols-2">
@@ -153,24 +153,24 @@ function ReservaForm() {
                 type="button"
                 onClick={() => setEntrega(o.id)}
                 aria-pressed={selecionada}
-                className={`relative rounded-lg border px-4 py-4 text-left transition-colors ${
+                className={`relative rounded-lg border px-4 py-5 text-left transition-colors ${
                   selecionada
                     ? "border-gold bg-cream/10"
                     : "border-gold/25 bg-cream/5 hover:border-gold/50"
                 }`}
               >
                 {selecionada && (
-                  <span className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-gold px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-background">
+                  <span className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-gold px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-background">
                     ✓ Selecionado
                   </span>
                 )}
-                <p className="font-display text-base text-cream">
+                <p className="font-display text-xl text-cream">
                   {o.titulo}
                 </p>
-                <p className="mt-1 font-display text-xl text-gold-soft">
+                <p className="mt-1 font-display text-2xl text-gold-soft">
                   {o.preco}
                 </p>
-                <p className="mt-2 text-xs leading-relaxed text-cream/60">
+                <p className="mt-2 text-base leading-relaxed text-cream/70">
                   {o.descricao}
                 </p>
               </button>
@@ -587,11 +587,6 @@ function Index() {
               </p>
               <p className="font-display text-2xl text-gold-soft">
                 “Eu quero fazer parte da preservação dessa história.”
-              </p>
-              <p>
-                É ajudar a transformar lembranças em páginas. É guardar um
-                pedaço dessa caminhada. É receber em suas mãos uma homenagem
-                feita com amor.
               </p>
               <p className="font-display text-xl text-gold-soft">
                 Lançamento oficial dia 26 de setembro de 2026 às 20h30, no
