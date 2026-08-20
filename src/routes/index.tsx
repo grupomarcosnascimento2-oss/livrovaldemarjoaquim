@@ -382,60 +382,6 @@ function Index() {
         </div>
       </section>
 
-      {/* SEGUNDA PAUSA + FINAL */}
-      <section className="surface-dark px-6 py-28 md:py-36">
-        <div className="mx-auto max-w-2xl text-center">
-          <Reveal>
-            <p className="font-display text-2xl text-gold-soft">
-              Feche os olhos por alguns segundos...
-            </p>
-            <p className="mt-4 text-cream/70">
-              e deixe a lembrança chegar devagar.
-            </p>
-            <div className="mt-12">
-              <Ornament />
-            </div>
-            <h2 className="mt-10 font-display text-3xl leading-snug md:text-5xl">
-              <span className="text-gold-gradient">
-                Algumas histórias terminam.
-              </span>
-              <br />
-              <span className="text-gold-gradient">
-                Outras continuam vivendo em nós.
-              </span>
-            </h2>
-            <div className="mt-12 space-y-4 text-lg leading-[1.9] text-cream/80">
-              <p>A história de Valdemar continua.</p>
-              <p>Continua nas lembranças.</p>
-              <p>Continua nos filhos.</p>
-              <p>Continua na família.</p>
-              <p>Continua nas pessoas que ele ajudou.</p>
-              <p>Continua na Igreja onde serviu.</p>
-              <p>
-                Continua nas mãos que um dia receberam a Eucaristia através
-                dele.
-              </p>
-              <p className="pt-4 font-display text-2xl text-gold-soft">
-                E agora... continua também neste livro.
-              </p>
-            </div>
-            <div className="mt-14">
-              <a
-                href={WHATSAPP}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold btn-gold-hover"
-              >
-                Eu quero fazer parte desta história
-              </a>
-              <p className="mt-5 text-sm text-cream/60">
-                Participe do pré-lançamento de “Da Roça ao Serviço no Altar”.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* RODAPÉ */}
       <footer className="bg-background px-6 py-16">
         <div className="mx-auto max-w-3xl text-center">
