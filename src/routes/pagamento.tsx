@@ -1,67 +1,44 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 
-type TipoEntrega = "retirada" | "correio";
-
-const ENTREGAS: Record<
-  TipoEntrega,
-  { titulo: string; preco: string; linkPagamento: string }
-> = {
-  retirada: {
-    titulo: "Retirar no dia do lançamento",
-    preco: "R$ 39,90",
-    linkPagamento: "https://mpago.li/19a7Nmt",
-  },
-  correio: {
-    titulo: "Receber em casa pelos Correios",
-    preco: "R$ 59,90",
-    linkPagamento: "https://mpago.la/2cGPjKd",
-  },
-};
-
 export const Route = createFileRoute("/pagamento")({
-  validateSearch: (
-    search: Record<string, unknown>,
-  ): { entrega: TipoEntrega } => ({
-    entrega: search.entrega === "correio" ? "correio" : "retirada",
-  }),
   head: () => ({
     meta: [
-      { title: "Pagamento — Da Roça ao Serviço no Altar" },
+      { title: "Obrigado! — Da Roça ao Serviço no Altar" },
       {
         name: "description",
         content:
-          "Efetive a aquisição antecipada do livro 'Da Roça ao Serviço no Altar'.",
+          "Pagamento confirmado. Obrigado por garantir seu exemplar de 'Da Roça ao Serviço no Altar'.",
       },
     ],
   }),
-  component: Pagamento,
+  component: Agradecimento,
 });
 
-function Pagamento() {
-  const { entrega } = Route.useSearch();
-  const opcao = ENTREGAS[entrega];
-
+function Agradecimento() {
   return (
-    <main className="surface-light min-h-screen px-6 py-20 md:py-28">
-      <div className="mx-auto max-w-xl">
+    <main className="surface-light flex min-h-screen items-center px-6 py-20 md:py-28">
+      <div className="mx-auto max-w-xl text-center">
         <Reveal>
-          <p className="text-center text-xs tracking-[0.42em] text-gold-deep uppercase">
-            Aquisição antecipada
+          <p className="text-xs tracking-[0.42em] text-gold-deep uppercase">
+            Pagamento confirmado
           </p>
-          <h1 className="mt-6 text-center font-display text-4xl leading-snug md:text-5xl">
-            <span className="text-gold-gradient">Da Roça ao</span>
+          <h1 className="mt-6 font-display text-4xl leading-snug md:text-5xl">
+            <span className="text-gold-gradient">Obrigado por fazer</span>
             <br />
-            <span className="text-gold-gradient">Serviço no Altar</span>
+            <span className="text-gold-gradient">parte desta história</span>
           </h1>
-          <p className="mt-6 text-center text-lg leading-relaxed text-muted-foreground">
-            Garanta agora seu exemplar antes do lançamento oficial e faça
-            parte deste momento especial.
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            Sua reserva do livro{" "}
+            <strong className="text-wood">
+              "Da Roça ao Serviço no Altar"
+            </strong>{" "}
+            foi confirmada com sucesso.
           </p>
         </Reveal>
 
         <Reveal delay={100}>
-          <div className="mt-10 rounded-2xl border border-gold/35 bg-card px-6 py-8 text-center md:px-10">
+          <div className="mt-10 rounded-2xl border border-gold/35 bg-card px-6 py-8 md:px-10">
             <p className="text-xs tracking-[0.32em] text-gold-deep uppercase">
               Lançamento oficial
             </p>
@@ -75,42 +52,11 @@ function Pagamento() {
         </Reveal>
 
         <Reveal delay={180}>
-          <div className="mt-8 rounded-2xl border border-gold/35 bg-card px-6 py-10 text-center md:px-10">
-            <p className="text-xs tracking-[0.32em] text-gold-deep uppercase">
-              {opcao.titulo}
-            </p>
-            <p className="mt-3 font-display text-5xl text-wood">
-              {opcao.preco}
-            </p>
-            {entrega === "correio" && (
-              <p className="mt-2 text-sm font-semibold text-gold-deep">
-                Frete grátis
-              </p>
-            )}
-
-            <div className="mt-10">
-              <a
-                href={opcao.linkPagamento}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold btn-gold-hover inline-flex items-center gap-2"
-              >
-                Pagar com Mercado Pago
-              </a>
-              <p className="mt-5 text-sm text-muted-foreground">
-                Você será direcionado para um ambiente seguro do Mercado Pago,
-                onde pode pagar via Pix, cartão ou outras formas disponíveis.
-              </p>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={260}>
-          <p className="mt-8 text-center text-sm text-muted-foreground">
-            Após confirmar o pagamento, você já garantiu seu exemplar. Nos
-            vemos no lançamento!
+          <p className="mt-8 text-base leading-relaxed text-muted-foreground">
+            Nos vemos no lançamento! Se você escolheu receber pelos Correios,
+            seu exemplar será enviado a partir dessa data.
           </p>
-          <p className="mt-4 text-center">
+          <p className="mt-6">
             <Link
               to="/"
               className="text-sm text-gold-deep underline underline-offset-4"

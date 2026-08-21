@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 import bookCover from "@/assets/book-cover.png";
 
@@ -80,7 +80,6 @@ const ENTREGAS: {
 ];
 
 function ReservaForm() {
-  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -119,9 +118,9 @@ function ReservaForm() {
 
     setSent(true);
 
-    // Segue automaticamente para o pagamento, sem exigir um segundo clique.
+    // Segue automaticamente para o pagamento no Mercado Pago, sem segundo clique.
     setTimeout(() => {
-      navigate({ to: "/pagamento", search: { entrega } });
+      window.location.href = opcaoEscolhida.linkPagamento;
     }, 900);
   }
 
@@ -135,13 +134,12 @@ function ReservaForm() {
           Redirecionando para o pagamento...
         </p>
         <p className="mt-6">
-          <Link
-            to="/pagamento"
-            search={{ entrega }}
+          <a
+            href={opcaoEscolhida.linkPagamento}
             className="btn-gold btn-gold-hover"
           >
-            Já quero garantir meu exemplar via Pix
-          </Link>
+            Já quero garantir meu exemplar via Mercado Pago
+          </a>
         </p>
       </div>
     );
