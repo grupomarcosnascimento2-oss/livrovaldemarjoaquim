@@ -59,6 +59,7 @@ const ENTREGAS: {
   titulo: string;
   preco: string;
   descricao: string;
+  linkPagamento: string;
 }[] = [
   {
     id: "retirada",
@@ -66,13 +67,15 @@ const ENTREGAS: {
     preco: "R$ 39,90",
     descricao:
       "Você retira seu exemplar pessoalmente no dia 26 de setembro de 2026, no salão da Paróquia Perpétuo Socorro, em Taguatinga Centro.",
+    linkPagamento: "https://mpago.li/19a7Nmt",
   },
   {
     id: "correio",
     titulo: "Receber em casa pelos Correios",
-    preco: "R$ 49,90",
+    preco: "R$ 59,90",
     descricao:
-      "Para a sua comodidade, o exemplar é enviado pelos Correios direto para a sua residência, a partir da data do lançamento.",
+      "Para a sua comodidade, o exemplar é enviado pelos Correios (frete grátis) direto para a sua residência, a partir da data do lançamento.",
+    linkPagamento: "https://mpago.la/2cGPjKd",
   },
 ];
 

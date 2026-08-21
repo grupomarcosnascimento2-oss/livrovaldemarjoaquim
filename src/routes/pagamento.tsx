@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 
@@ -6,15 +5,17 @@ type TipoEntrega = "retirada" | "correio";
 
 const ENTREGAS: Record<
   TipoEntrega,
-  { titulo: string; preco: string }
+  { titulo: string; preco: string; linkPagamento: string }
 > = {
   retirada: {
     titulo: "Retirar no dia do lançamento",
     preco: "R$ 39,90",
+    linkPagamento: "https://mpago.li/19a7Nmt",
   },
   correio: {
     titulo: "Receber em casa pelos Correios",
-    preco: "R$ 49,90",
+    preco: "R$ 59,90",
+    linkPagamento: "https://mpago.la/2cGPjKd",
   },
 };
 
@@ -30,29 +31,16 @@ export const Route = createFileRoute("/pagamento")({
       {
         name: "description",
         content:
-          "Efetive a aquisição antecipada do livro 'Da Roça ao Serviço no Altar' via Pix.",
+          "Efetive a aquisição antecipada do livro 'Da Roça ao Serviço no Altar'.",
       },
     ],
   }),
   component: Pagamento,
 });
 
-const PIX_KEY = "livropapaivaldemarjoaquim@gmail.com";
-
 function Pagamento() {
   const { entrega } = Route.useSearch();
   const opcao = ENTREGAS[entrega];
-  const [copied, setCopied] = useState(false);
-
-  async function handleCopy() {
-    try {
-      await navigator.clipboard.writeText(PIX_KEY);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    } catch {
-      // Falha silenciosa: o usuário ainda pode selecionar e copiar manualmente.
-    }
-  }
 
   return (
     <main className="surface-light min-h-screen px-6 py-20 md:py-28">
@@ -94,38 +82,25 @@ function Pagamento() {
             <p className="mt-3 font-display text-5xl text-wood">
               {opcao.preco}
             </p>
+            {entrega === "correio" && (
+              <p className="mt-2 text-sm font-semibold text-gold-deep">
+                Frete grátis
+              </p>
+            )}
 
-            <p className="mt-8 text-sm tracking-[0.28em] text-gold-deep uppercase">
-              Pague com Pix
-            </p>
-            <div className="mt-4 flex flex-col items-stretch gap-3 sm:flex-row">
-              <div className="flex-1 truncate rounded-md border border-gold/40 bg-background px-4 py-3 text-left text-base text-ink/85">
-                {PIX_KEY}
-              </div>
-              <button
-                type="button"
-                onClick={handleCopy}
-                className="btn-gold btn-gold-hover shrink-0 whitespace-nowrap"
+            <div className="mt-10">
+              <a
+                href={opcao.linkPagamento}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gold btn-gold-hover inline-flex items-center gap-2"
               >
-                {copied ? "Copiado!" : "Copiar Pix"}
-              </button>
-            </div>
-
-            <div className="mt-10 space-y-3 text-left text-base leading-relaxed text-muted-foreground">
-              <p className="font-display text-lg text-wood">Como pagar:</p>
-              <ol className="list-decimal space-y-2 pl-5">
-                <li>Copie a chave Pix acima.</li>
-                <li>Abra o aplicativo do seu banco.</li>
-                <li>
-                  Escolha a opção Pix e cole a chave copiada no campo
-                  correspondente.
-                </li>
-                <li>
-                  Confira o valor de{" "}
-                  <strong className="text-wood">{opcao.preco}</strong> e
-                  confirme o pagamento.
-                </li>
-              </ol>
+                Pagar com Mercado Pago
+              </a>
+              <p className="mt-5 text-sm text-muted-foreground">
+                Você será direcionado para um ambiente seguro do Mercado Pago,
+                onde pode pagar via Pix, cartão ou outras formas disponíveis.
+              </p>
             </div>
           </div>
         </Reveal>
