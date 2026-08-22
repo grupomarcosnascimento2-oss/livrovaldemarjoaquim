@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 import bookCover from "@/assets/book-cover.png";
 
@@ -79,10 +79,8 @@ const ENTREGAS: {
   },
 ];
 
-const PIX_COPIA_COLA_RETIRADA =
-  "00020126580014br.gov.bcb.pix0136a8883d46-c869-4ed6-8dd3-d106c1d573cd520400005303986540539.905802BR5924Marcos Nascimento de Sou6009Sao Paulo62230519daqr4316215470887786304CA4B";
-
 function ReservaForm() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -95,19 +93,8 @@ function ReservaForm() {
   const [cidade, setCidade] = useState("");
   const [cep, setCep] = useState("");
   const [sent, setSent] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const opcaoEscolhida = ENTREGAS.find((o) => o.id === entrega)!;
-
-  async function handleCopyPix() {
-    try {
-      await navigator.clipboard.writeText(PIX_COPIA_COLA_RETIRADA);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    } catch {
-      // Falha silenciosa: o usuário ainda pode selecionar e copiar manualmente.
-    }
-  }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -132,57 +119,18 @@ function ReservaForm() {
 
     setSent(true);
 
+    // Retirada segue para a página de pagamento (Pix em foco).
     // Correios segue direto para o Mercado Pago (várias formas de pagamento).
-    // Retirada mostra o Pix Copia e Cola na própria página (ver abaixo).
-    if (entrega === "correio") {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (entrega === "retirada") {
+        navigate({ to: "/pagamento", search: { entrega: "retirada" } });
+      } else {
         window.location.href = opcaoEscolhida.linkPagamento;
-      }, 900);
-    }
+      }
+    }, 900);
   }
 
   if (sent) {
-    if (entrega === "retirada") {
-      return (
-        <div className="rounded-2xl border border-gold/35 bg-cream/5 px-6 py-8 text-center">
-          <p className="font-display text-xl text-gold-soft">
-            Obrigado! Sua reserva foi registrada com sucesso.
-          </p>
-          <p className="mt-4 font-display text-3xl text-cream">
-            {opcaoEscolhida.preco}
-          </p>
-          <p className="mt-6 text-sm tracking-[0.28em] text-gold-soft uppercase">
-            Pague com Pix
-          </p>
-          <div className="mt-4 flex flex-col items-stretch gap-3 sm:flex-row">
-            <div className="flex-1 truncate rounded-md border border-gold/40 bg-background px-4 py-3 text-left text-sm text-ink/85">
-              {PIX_COPIA_COLA_RETIRADA}
-            </div>
-            <button
-              type="button"
-              onClick={handleCopyPix}
-              className="btn-gold btn-gold-hover shrink-0 whitespace-nowrap"
-            >
-              {copied ? "Copiado!" : "Copiar Pix"}
-            </button>
-          </div>
-          <div className="mt-8 space-y-2 text-left text-sm leading-relaxed text-cream/70">
-            <p className="font-display text-base text-cream">Como pagar:</p>
-            <ol className="list-decimal space-y-1 pl-5">
-              <li>Copie o código Pix acima.</li>
-              <li>Abra o aplicativo do seu banco.</li>
-              <li>Escolha Pix Copia e Cola e cole o código.</li>
-              <li>
-                Confira o valor de{" "}
-                <strong className="text-cream">{opcaoEscolhida.preco}</strong>{" "}
-                e confirme o pagamento.
-              </li>
-            </ol>
-          </div>
-        </div>
-      );
-    }
-
     return (
       <div>
         <p className="font-display text-xl text-gold-soft">
@@ -190,14 +138,6 @@ function ReservaForm() {
         </p>
         <p className="mt-3 text-sm text-cream/60">
           Redirecionando para o pagamento...
-        </p>
-        <p className="mt-6">
-          <a
-            href={opcaoEscolhida.linkPagamento}
-            className="btn-gold btn-gold-hover"
-          >
-            Já quero garantir meu exemplar via Mercado Pago
-          </a>
         </p>
       </div>
     );
