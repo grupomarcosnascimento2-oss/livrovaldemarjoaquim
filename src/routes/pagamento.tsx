@@ -3,16 +3,30 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 
 type Entrega = "retirada" | "correio" | undefined;
+type StatusPagamento = "approved" | "pending" | "rejected" | undefined;
 
 const PIX_COPIA_COLA_RETIRADA =
   "00020126580014br.gov.bcb.pix0136a8883d46-c869-4ed6-8dd3-d106c1d573cd520400005303986540539.905802BR5924Marcos Nascimento de Sou6009Sao Paulo62230519daqr4316215470887786304CA4B";
 
 export const Route = createFileRoute("/pagamento")({
-  validateSearch: (search: Record<string, unknown>): { entrega?: Entrega } => ({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { entrega?: Entrega; status?: StatusPagamento } => ({
     entrega:
       search.entrega === "retirada" || search.entrega === "correio"
         ? (search.entrega as Entrega)
         : undefined,
+    status:
+      search.status === "approved" ||
+      search.collection_status === "approved"
+        ? "approved"
+        : search.status === "rejected" ||
+            search.collection_status === "rejected"
+          ? "rejected"
+          : search.status === "pending" ||
+              search.collection_status === "pending"
+            ? "pending"
+            : undefined,
   }),
   head: () => ({
     meta: [
@@ -28,13 +42,13 @@ export const Route = createFileRoute("/pagamento")({
 });
 
 function Pagamento() {
-  const { entrega } = Route.useSearch();
+  const { entrega, status } = Route.useSearch();
 
   if (entrega === "retirada") {
     return <PagamentoPix />;
   }
 
-  return <Agradecimento />;
+  return <Agradecimento status={status} />;
 }
 
 function PagamentoPix() {
@@ -124,13 +138,80 @@ function PagamentoPix() {
   );
 }
 
-function Agradecimento() {
+function Agradecimento({ status }: { status: StatusPagamento }) {
+  if (status === "rejected") {
+    return (
+      <main className="surface-light flex min-h-screen items-center px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-xl text-center">
+          <Reveal>
+            <p className="text-xs tracking-[0.42em] text-gold-deep uppercase">
+              Pagamento não aprovado
+            </p>
+            <h1 className="mt-6 font-display text-4xl leading-snug md:text-5xl">
+              Algo não deu certo
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+              Seu pagamento não foi aprovado pelo Mercado Pago. Isso pode
+              acontecer por instabilidade momentânea — tente novamente ou
+              escolha outra forma de pagamento.
+            </p>
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="mt-8">
+              <Link to="/" className="btn-gold btn-gold-hover">
+                Voltar e tentar novamente
+              </Link>
+            </p>
+          </Reveal>
+        </div>
+      </main>
+    );
+  }
+
+  if (status === "pending") {
+    return (
+      <main className="surface-light flex min-h-screen items-center px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-xl text-center">
+          <Reveal>
+            <p className="text-xs tracking-[0.42em] text-gold-deep uppercase">
+              Pagamento em análise
+            </p>
+            <h1 className="mt-6 font-display text-4xl leading-snug md:text-5xl">
+              <span className="text-gold-gradient">
+                Estamos confirmando seu pagamento
+              </span>
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+              Seu pagamento está sendo processado. Assim que for aprovado,
+              sua reserva do livro{" "}
+              <strong className="text-wood">
+                "Da Roça ao Serviço no Altar"
+              </strong>{" "}
+              estará confirmada — normalmente isso leva poucos minutos.
+            </p>
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="mt-8">
+              <Link
+                to="/"
+                className="text-sm text-gold-deep underline underline-offset-4"
+              >
+                Voltar para a página do livro
+              </Link>
+            </p>
+          </Reveal>
+        </div>
+      </main>
+    );
+  }
+
+  // status === "approved" ou indefinido (acesso direto, sem retorno do MP)
   return (
     <main className="surface-light flex min-h-screen items-center px-6 py-20 md:py-28">
       <div className="mx-auto max-w-xl text-center">
         <Reveal>
           <p className="text-xs tracking-[0.42em] text-gold-deep uppercase">
-            Pagamento confirmado
+            {status === "approved" ? "Pagamento confirmado" : "Reserva"}
           </p>
           <h1 className="mt-6 font-display text-4xl leading-snug md:text-5xl">
             <span className="text-gold-gradient">Obrigado por fazer</span>
@@ -138,11 +219,23 @@ function Agradecimento() {
             <span className="text-gold-gradient">parte desta história</span>
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-            Sua reserva do livro{" "}
-            <strong className="text-wood">
-              "Da Roça ao Serviço no Altar"
-            </strong>{" "}
-            foi confirmada com sucesso.
+            {status === "approved" ? (
+              <>
+                Sua reserva do livro{" "}
+                <strong className="text-wood">
+                  "Da Roça ao Serviço no Altar"
+                </strong>{" "}
+                foi confirmada com sucesso.
+              </>
+            ) : (
+              <>
+                Se você concluiu o pagamento, sua reserva do livro{" "}
+                <strong className="text-wood">
+                  "Da Roça ao Serviço no Altar"
+                </strong>{" "}
+                está garantida.
+              </>
+            )}
           </p>
         </Reveal>
 
